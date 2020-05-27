@@ -28,7 +28,14 @@ class Bot(discord.Client):
                         '**ELLE** a pas __encore__ mangé...']
                 await msg.channel.send(random.choice(tab))
 
+        async def cmdBadLang(msg):
+            text = str(msg.content).lower()
+
+            if sum([k in text.split() for k in ["certe", "certes"]]):
+                    await msg.add_reaction("😡");
+
         await cmdElle(msg)
+        await cmdBadLang(msg)
 
 if __name__ == "__main__":
     bot = Bot()
