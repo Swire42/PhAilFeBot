@@ -1,15 +1,14 @@
 import discord
 import tok
 import random
+import time
 
 class Bot(discord.Client):
     def __init__(self):
         super().__init__()
 
     async def on_ready(self):
-        print("logged in as")
-        print(self.user.name)
-        print(self.user.id)
+        print("["+time.asctime()+"] Logged in.")
 
     async def on_message(self,message):
         if (message.author == self.user):
@@ -29,7 +28,6 @@ class Bot(discord.Client):
             await message.channel.send(random.choice(tab))
 
 if __name__ == "__main__":
-
     bot = Bot()
 
 bot.run(tok.TOKEN)
