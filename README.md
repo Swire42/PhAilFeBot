@@ -1,2 +1,2 @@
 # PhAilFeBot
-The official PhAilFe's Bot !!! \(^-^)/
+The official PhAilFe's Bot !!! \\(^-^)/
