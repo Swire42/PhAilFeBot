@@ -28,7 +28,6 @@ class Bot(discord.Client):
                         '**ELLE** a pas __encore__ mangé...']
                 await msg.channel.send(random.choice(tab))
 
-        await cmdRank(msg)
         await cmdElle(msg)
 
 if __name__ == "__main__":
