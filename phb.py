@@ -10,22 +10,26 @@ class Bot(discord.Client):
     async def on_ready(self):
         print("["+time.asctime()+"] Logged in.")
 
-    async def on_message(self,message):
-        if (message.author == self.user):
+    async def on_message(self, msg):
+        if (msg.author == self.user):
             return
 
-        text = str(message.content)
-        if "elle" in text.lower():
-            if "encore" in text.lower():
-                if random.randint(0,4)!=0:
-                    return
+        async def cmdElle(msg):
+            text = str(msg.content)
+            if "elle" in text.lower():
+                if "elle" in text.lower().split():
+                    if random.randint(0,3)!=0:
+                        return
 
-            tab=['**Elle a pas encore mangé !**',
-                    '__**ELLE A PAS ENCORE MANGÉ !**__',
-                    '**eLlE a PaS eNcOrE mAnGé !**',
-                    '**3773 A PA5 3NC0R3 MANG3 !**',
-                    '**ELLE** a pas __encore__ mangé...']
-            await message.channel.send(random.choice(tab))
+                tab=['**Elle a pas encore mangé !**',
+                        '__**ELLE A PAS ENCORE MANGÉ !**__',
+                        '**eLlE a PaS eNcOrE mAnGé !**',
+                        '**3773 A PA5 3NC0R3 MANG3 !**',
+                        '**ELLE** a pas __encore__ mangé...']
+                await msg.channel.send(random.choice(tab))
+
+        await cmdRank(msg)
+        await cmdElle(msg)
 
 if __name__ == "__main__":
     bot = Bot()
