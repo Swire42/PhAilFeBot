@@ -26,7 +26,7 @@ class Bot(discord.Client):
 
         async def cmdElle(msg):
             text = str(msg.content)
-            if proba(0.5, 0.90, 10*60, time.time()-self.elleTime):
+            if proba(0.33, 0.75, 10*60, time.time()-self.elleTime):
                 self.elleTime = time.time()
                 if "elle" in text.lower():
                     tab=['**Elle a pas encore mangé !**',
@@ -75,7 +75,7 @@ class Bot(discord.Client):
                     self.time = time.time()
 
         async def cmdDit(msg):
-            if proba(0.5, 0.90, 10*60, time.time()-self.ditTime):
+            if proba(0.33, 0.75, 10*60, time.time()-self.ditTime):
                 self.ditTime = time.time()
 
                 text = str(msg.content)
