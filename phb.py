@@ -8,6 +8,7 @@ class Bot(discord.Client):
     def __init__(self):
         super().__init__()
         self.motusGame=None
+        self.motusLock=False
 
     async def on_ready(self):
         print("["+time.asctime()+"] Logged in.")
@@ -37,6 +38,9 @@ class Bot(discord.Client):
                     await msg.add_reaction("😡");
 
         async def cmdMotus(msg):
+            while self.motusLock:
+                time.sleep(0.01)
+            self.motusLock=True
             text = str(msg.content).lower()
             if msg.channel.name=="motus":
                 if self.motusGame==None:
@@ -51,6 +55,7 @@ class Bot(discord.Client):
                             if self.motusGame.win():
                                 await msg.channel.send("```\n"+self.motusGame.scoreboard()+"\n```")
                                 self.motusGame=None
+            self.motusLock=False
 
         await cmdElle(msg)
         await cmdBadLang(msg)
