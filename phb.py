@@ -44,7 +44,7 @@ class Bot(discord.Client):
             text = str(msg.content).lower()
             if msg.channel.name=="motus":
                 if self.motusGame==None:
-                    if text=="motus":
+                    if "motus" in text:
                         self.motusGame=motus.Motus()
                         await msg.channel.send("```\n"+self.motusGame.txt()+"\n```")
                 else:
