@@ -55,6 +55,9 @@ class Bot(discord.Client):
             if ("elle" in text and "mang" in text) and ("?" in text):
                 await self.sayElle(msg.channel)
 
+            if ("phailf" in text) and ("PhAilF" not in str(msg.content)):
+                await msg.add_reaction("😡");
+
         async def cmdMotus(msg):
             text = str(msg.content).lower()
             if msg.channel.name=="motus":
