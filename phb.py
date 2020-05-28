@@ -60,19 +60,19 @@ class Bot(discord.Client):
                         self.motusGame=motus.Motus()
                         await msg.channel.send("```\n"+self.motusGame.txt()+"\n```")
                 else:
+                    ret=self.motusGame.submit(text, msg.author.display_name)
                     if len(text)==8:
-                        ret=self.motusGame.submit(text, msg.author.display_name)
                         if ret>=0:
                             await msg.channel.send("```\n"+self.motusGame.txt()+"\n```")
                             if self.motusGame.win():
                                 await msg.channel.send("```\n"+self.motusGame.scoreboard()+"\n```")
                                 self.motusGame=None
-                        if ret==-7 and text[0]==self.motusGame.word[0]:
-                            await msg.add_reaction("7️⃣")
-                        if ret==-9 and text[0]==self.motusGame.word[0]:
-                            await msg.add_reaction("9️⃣")
-                        if ret==-1:
-                            await msg.add_reaction("📖")
+                    if ret==-7 and text[0]==(self.motusGame.word[0].lower()):
+                        await msg.add_reaction("7️⃣")
+                    if ret==-9 and text[0]==(self.motusGame.word[0].lower()):
+                        await msg.add_reaction("9️⃣")
+                    if ret==-8:
+                        await msg.add_reaction("📖")
 
         async def cmdPerdu(msg):
             text = str(msg.content).lower().split()

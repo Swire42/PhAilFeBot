@@ -24,8 +24,8 @@ class Motus:
         if (len(w)!=8) or (w[0].upper() != self.word[0]) or (w.lower() not in db.db):
             if len(w)==7: return -7
             if len(w)==9: return -9
-            if w.lower() not in db.db: return -1
-            return -2
+            if len(w)==8 and w.lower() not in db.db: return -8
+            return -1
 
         w=list(w.lower())
         tmp=self.word.copy()
