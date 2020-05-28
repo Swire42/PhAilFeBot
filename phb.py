@@ -59,15 +59,16 @@ class Bot(discord.Client):
             self.motusLock=False
 
         async def cmdPerdu(msg):
+            text = str(msg.content).lower().split()
             if str(msg.channel) in ["settings"]:
-                if time.time() - self.time >= 600:
-                    text = str(msg.content).lower().split()
+                if time.time() - self.time >= 15*60:
                     if "j'ai" in text:
                         if "perdu" in text:
-                            await msg.channel.send("J'ai perdu")
+                            await msg.channel.send("**J'ai perdu !**")
                             self.time = time.time()
-                if time.time() - self.time >= 3600:
-                    await msg.channel.send("J'ai perdu")
+                if ("per" in text) and (time.time() - self.time >= 15*60) and (random.randint(0, 3)==0):
+                    await msg.channel.send("**J'ai perdu !**")
+                    self.time = time.time()
 
         async def cmdDit(msg):
             if random.randint(0, 3)==0:
