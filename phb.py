@@ -53,9 +53,6 @@ class Bot(discord.Client):
                 await self.sayElle(msg.channel)
 
         async def cmdMotus(msg):
-            while self.motusLock:
-                time.sleep(0.01)
-            self.motusLock=True
             text = str(msg.content).lower()
             if msg.channel.name=="motus":
                 if self.motusGame==None:
@@ -70,7 +67,6 @@ class Bot(discord.Client):
                             if self.motusGame.win():
                                 await msg.channel.send("```\n"+self.motusGame.scoreboard()+"\n```")
                                 self.motusGame=None
-            self.motusLock=False
 
         async def cmdPerdu(msg):
             text = str(msg.content).lower().split()
