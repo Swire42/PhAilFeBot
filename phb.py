@@ -20,21 +20,24 @@ class Bot(discord.Client):
     async def on_ready(self):
         print("["+time.asctime()+"] Logged in.")
 
+    async def sayElle(self, chan):
+        tab=['**Elle a pas encore mangé !**',
+                '__**ELLE A PAS ENCORE MANGÉ !**__',
+                '**eLlE a PaS eNcOrE mAnGé !**',
+                '**3773 A PA5 3NC0R3 MANG3 !**',
+                '**ELLE** a pas __encore__ mangé...']
+        await chan.send(random.choice(tab))
+
     async def on_message(self, msg):
         if (msg.author == self.user):
             return
 
         async def cmdElle(msg):
-            text = str(msg.content)
+            text = str(msg.content).lower()
             if proba(0.33, 0.75, 10*60, time.time()-self.elleTime):
                 self.elleTime = time.time()
-                if "elle" in text.lower():
-                    tab=['**Elle a pas encore mangé !**',
-                            '__**ELLE A PAS ENCORE MANGÉ !**__',
-                            '**eLlE a PaS eNcOrE mAnGé !**',
-                            '**3773 A PA5 3NC0R3 MANG3 !**',
-                            '**ELLE** a pas __encore__ mangé...']
-                    await msg.channel.send(random.choice(tab))
+                if ("elle" in text) and ("mang" not in text):
+                    await self.sayElle(msg.channel)
 
         async def cmdBadLang(msg):
             text = str(msg.content).lower()
@@ -42,8 +45,12 @@ class Bot(discord.Client):
             if sum([k in text.split() for k in ["certe", "certes"]]):
                 await msg.add_reaction("😡");
 
-            if ("elle" in text and "mangé" in text) and ("pas" not in text):
+            if ("elle" in text and "mang" in text) and ("pas" not in text) and ("?" not in text):
                 await msg.add_reaction("😡");
+                await self.sayElle(msg.channel)
+
+            if ("elle" in text and "mang" in text) and ("?" in text):
+                await self.sayElle(msg.channel)
 
         async def cmdMotus(msg):
             while self.motusLock:
