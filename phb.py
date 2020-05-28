@@ -66,6 +66,7 @@ class Bot(discord.Client):
                             await msg.channel.send("```\n"+self.motusGame.txt()+"\n```")
                             if self.motusGame.win():
                                 await msg.channel.send("```\n"+self.motusGame.scoreboard()+"\n```")
+                                await msg.channel.send("https://fr.wiktionary.org/wiki/"+"".join(self.motusGame.word).lower())
                                 self.motusGame=None
                     if ret==-7 and text[0]==(self.motusGame.word[0].lower()):
                         await msg.add_reaction("7️⃣")
