@@ -119,7 +119,8 @@ class Bot(discord.Client):
         await cmdShit(msg)
 
     async def on_reaction_add(self, reaction, user):
-        self.sqldb.add(reaction.message.content)
+        if len(reaction.message.content)<=100:
+            self.sqldb.add(reaction.message.content)
 
 if __name__ == "__main__":
     bot = Bot()
