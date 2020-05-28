@@ -125,6 +125,7 @@ class Bot(discord.Client):
 
     async def on_reaction_add(self, reaction, user):
         if "PhAilFeBot" in str(user): return
+        if str(user) == str(reaction.message.author): return
         if str(reaction) == "😡": return
         if len(reaction.message.content)<=100:
             self.sqldb.add(reaction.message.content)
