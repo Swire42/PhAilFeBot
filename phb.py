@@ -59,7 +59,7 @@ class Bot(discord.Client):
             self.motusLock=False
 
         async def cmdPerdu(msg):
-            if str(msg.channel) in ["general"]:
+            if str(msg.channel) in ["settings"]:
                 if time.time() - self.time >= 600:
                     text = str(msg.content).lower().split()
                     if "j'ai" in text:
