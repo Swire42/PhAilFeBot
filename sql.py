@@ -22,4 +22,4 @@ class SQLDB:
         return text
 
     def size(self):
-        return list(s.cursor.execute('select count(*) from coolmsg'))[0][0]
+        return list(self.cursor.execute('select count(*) from coolmsg'))[0][0]
