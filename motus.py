@@ -21,13 +21,8 @@ class Motus:
         global db
         score=0
 
-        if len(w)!=8:
-            return -1
-
-        if w[0].upper() != self.word[0]:
-            return -1
-
-        if w.lower() not in db.db:
+        if (len(w)!=8) or (w[0].upper() != self.word[0]) or (w.lower() not in db.db):
+            self.lock=False
             return -1
 
         w=list(w.lower())
