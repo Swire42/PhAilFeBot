@@ -18,6 +18,7 @@ class Bot(discord.Client):
         self.time = time.time()
         self.elleTime = time.time()
         self.ditTime = time.time()
+        self.shitTime = time.time()
 
     async def on_ready(self):
         print("["+time.asctime()+"] Logged in.")
@@ -106,7 +107,8 @@ class Bot(discord.Client):
                             await msg.channel.send(text[pos+2:len(text)])
 
         async def cmdShit(msg):
-            if proba(0.01*self.sqldb.size(), 0.25, 60*60, time.time()-self.ditTime):
+            if proba(0.01*self.sqldb.size(), 0.25, 60*60, time.time()-self.shitTime):
+                self.shitTime = time.time()
                 text=self.sqldb.get()
                 if text is not None:
                     await msg.channel.send(text)
