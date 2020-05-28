@@ -110,7 +110,7 @@ class Bot(discord.Client):
                             await msg.channel.send(text[pos+2:len(text)])
 
         async def cmdShit(msg):
-            if proba(0.01*self.sqldb.size(), 0.25, 60*60, time.time()-self.shitTime):
+            if proba(min(0.1, 0.01*self.sqldb.size()), 0.25, 60*60, time.time()-self.shitTime):
                 self.shitTime = time.time()
                 text=self.sqldb.get()
                 if text is not None:
