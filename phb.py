@@ -87,7 +87,7 @@ class Bot(discord.Client):
                     pos = text.lower().find("dy")
                 if pos != -1:
                     if text[pos+2:len(text)]:
-                        if text[pos+3] == ' ':
+                        if text[pos+3:pos+4] == ' ':
                             if text[pos+3:len(text)]:
                                 await msg.channel.send(text[pos+3:len(text)])
                         else:
