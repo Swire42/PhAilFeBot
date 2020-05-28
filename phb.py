@@ -9,6 +9,7 @@ class Bot(discord.Client):
         super().__init__()
         self.motusGame=None
         self.motusLock=False
+        self.time = time.time()
 
     async def on_ready(self):
         print("["+time.asctime()+"] Logged in.")
@@ -56,10 +57,36 @@ class Bot(discord.Client):
                                 await msg.channel.send("```\n"+self.motusGame.scoreboard()+"\n```")
                                 self.motusGame=None
             self.motusLock=False
+            
+        async def cmdPerdu(msg):
+            if str(msg.channel) in ["general"]:
+                if time.time() - self.time >= 600:
+                    text = str(msg.content).lower().split()
+                    if "j'ai" in text:
+                        if "perdu" in text:
+                            await msg.channel.send("J'ai perdu")
+                            self.time = time.time()
+                if time.time() - self.time >= 3600:
+                    await msg.channel.send("J'ai perdu")
+
+        async def cmdDit(msg):
+            if not random.randint(0, 3)
+            text = str(msg.content).lower()
+            pos = text.find("di")
+            if pos != -1:
+                if not text[pos+2:len(text)]:
+                    if text[pos+2] == 't':
+                        if not text[pos+3:len(text)]:
+                            await msg.channel.send(text[pos+3:len(text)])
+                    else:
+                        await msg.channel.send(text[pos+2:len(text)])
+
 
         await cmdElle(msg)
         await cmdBadLang(msg)
         await cmdMotus(msg)
+        await cmdPerdu(msg)
+        await cmdDit(msg)
 
 if __name__ == "__main__":
     bot = Bot()
