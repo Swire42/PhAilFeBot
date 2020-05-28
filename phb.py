@@ -3,6 +3,10 @@ import tok
 import random
 import time
 import motus
+import math
+
+def proba(a, b, tau, t):
+    return random.random() < b+(a-b)*math.exp(-t/tau)
 
 class Bot(discord.Client):
     def __init__(self):
@@ -10,6 +14,8 @@ class Bot(discord.Client):
         self.motusGame=None
         self.motusLock=False
         self.time = time.time()
+        self.elleTime = time.time()
+        self.ditTime = time.time()
 
     async def on_ready(self):
         print("["+time.asctime()+"] Logged in.")
@@ -20,17 +26,15 @@ class Bot(discord.Client):
 
         async def cmdElle(msg):
             text = str(msg.content)
-            if "elle" in text.lower():
-                if "elle" in text.lower().split():
-                    if random.randint(0,3)!=0:
-                        return
-
-                tab=['**Elle a pas encore mangé !**',
-                        '__**ELLE A PAS ENCORE MANGÉ !**__',
-                        '**eLlE a PaS eNcOrE mAnGé !**',
-                        '**3773 A PA5 3NC0R3 MANG3 !**',
-                        '**ELLE** a pas __encore__ mangé...']
-                await msg.channel.send(random.choice(tab))
+            if proba(0.25, 0.75, 10*60, time.time()-self.elleTime):
+                self.elleTime = time.time()
+                if "elle" in text.lower():
+                    tab=['**Elle a pas encore mangé !**',
+                            '__**ELLE A PAS ENCORE MANGÉ !**__',
+                            '**eLlE a PaS eNcOrE mAnGé !**',
+                            '**3773 A PA5 3NC0R3 MANG3 !**',
+                            '**ELLE** a pas __encore__ mangé...']
+                    await msg.channel.send(random.choice(tab))
 
         async def cmdBadLang(msg):
             text = str(msg.content).lower()
@@ -71,7 +75,9 @@ class Bot(discord.Client):
                     self.time = time.time()
 
         async def cmdDit(msg):
-            if random.randint(0, 3)==0:
+            if proba(0.25, 0.75, 10*60, time.time()-self.ditTime):
+                self.ditTime = time.time()
+
                 text = str(msg.content).lower()
                 pos = text.find("di")
                 if pos != -1:
