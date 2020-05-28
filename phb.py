@@ -70,16 +70,16 @@ class Bot(discord.Client):
                     await msg.channel.send("J'ai perdu")
 
         async def cmdDit(msg):
-            if not random.randint(0, 3)
-            text = str(msg.content).lower()
-            pos = text.find("di")
-            if pos != -1:
-                if not text[pos+2:len(text)]:
-                    if text[pos+2] == 't':
-                        if not text[pos+3:len(text)]:
-                            await msg.channel.send(text[pos+3:len(text)])
-                    else:
-                        await msg.channel.send(text[pos+2:len(text)])
+            if random.randint(0, 3)==0:
+                text = str(msg.content).lower()
+                pos = text.find("di")
+                if pos != -1:
+                    if not text[pos+2:len(text)]:
+                        if text[pos+2] == 't':
+                            if not text[pos+3:len(text)]:
+                                await msg.channel.send(text[pos+3:len(text)])
+                        else:
+                            await msg.channel.send(text[pos+2:len(text)])
 
 
         await cmdElle(msg)
