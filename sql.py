@@ -20,3 +20,6 @@ class SQLDB:
         except:
             text=None
         return text
+
+    def size(self):
+        return list(self.cursor.execute('select count(*) from coolmsg'))[0][0]
