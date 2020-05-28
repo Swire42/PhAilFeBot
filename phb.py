@@ -57,7 +57,7 @@ class Bot(discord.Client):
                                 await msg.channel.send("```\n"+self.motusGame.scoreboard()+"\n```")
                                 self.motusGame=None
             self.motusLock=False
-            
+
         async def cmdPerdu(msg):
             if str(msg.channel) in ["general"]:
                 if time.time() - self.time >= 600:
@@ -74,9 +74,9 @@ class Bot(discord.Client):
                 text = str(msg.content).lower()
                 pos = text.find("di")
                 if pos != -1:
-                    if not text[pos+2:len(text)]:
+                    if text[pos+2:len(text)]:
                         if text[pos+2] == 't':
-                            if not text[pos+3:len(text)]:
+                            if text[pos+3:len(text)]:
                                 await msg.channel.send(text[pos+3:len(text)])
                         else:
                             await msg.channel.send(text[pos+2:len(text)])
