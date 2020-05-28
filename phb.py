@@ -124,6 +124,7 @@ class Bot(discord.Client):
         await cmdShit(msg)
 
     async def on_reaction_add(self, reaction, user):
+        if "PhAilFeBot" in str(user): return
         if len(reaction.message.content)<=100:
             self.sqldb.add(reaction.message.content)
 
