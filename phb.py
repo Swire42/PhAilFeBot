@@ -2,10 +2,12 @@ import discord
 import tok
 import random
 import time
+import motus
 
 class Bot(discord.Client):
     def __init__(self):
         super().__init__()
+        self.motusGame=None
 
     async def on_ready(self):
         print("["+time.asctime()+"] Logged in.")
@@ -34,8 +36,25 @@ class Bot(discord.Client):
             if sum([k in text.split() for k in ["certe", "certes"]]):
                     await msg.add_reaction("😡");
 
+        async def cmdMotus(msg):
+            text = str(msg.content).lower()
+            if msg.channel.name=="motus":
+                if self.motusGame==None:
+                    if text=="motus":
+                        self.motusGame=motus.Motus()
+                        await msg.channel.send("```\n"+self.motusGame.txt()+"\n```")
+                else:
+                    if len(text)==8:
+                        ret=self.motusGame.submit(text, msg.author.display_name)
+                        if ret>=0:
+                            await msg.channel.send("```\n"+self.motusGame.txt()+"\n```")
+                            if self.motusGame.win():
+                                await msg.channel.send("```\n"+self.motusGame.scoreboard()+"\n```")
+                                self.motusGame=None
+
         await cmdElle(msg)
         await cmdBadLang(msg)
+        await cmdMotus(msg)
 
 if __name__ == "__main__":
     bot = Bot()
