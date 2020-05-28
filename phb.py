@@ -40,7 +40,10 @@ class Bot(discord.Client):
             text = str(msg.content).lower()
 
             if sum([k in text.split() for k in ["certe", "certes"]]):
-                    await msg.add_reaction("😡");
+                await msg.add_reaction("😡");
+
+            if ("elle" in text and "mangé" in text) and ("pas" not in text):
+                await msg.add_reaction("😡");
 
         async def cmdMotus(msg):
             while self.motusLock:
