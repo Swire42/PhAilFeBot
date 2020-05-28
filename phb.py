@@ -4,6 +4,7 @@ import random
 import time
 import motus
 import math
+import sql
 
 def proba(a, b, tau, t):
     return random.random() < b+(a-b)*math.exp(-t/tau)
@@ -11,6 +12,7 @@ def proba(a, b, tau, t):
 class Bot(discord.Client):
     def __init__(self):
         super().__init__()
+        self.sqldb=sql.SQLDB()
         self.motusGame=None
         self.motusLock=False
         self.time = time.time()
@@ -103,12 +105,21 @@ class Bot(discord.Client):
                         else:
                             await msg.channel.send(text[pos+2:len(text)])
 
+        async def cmdShit(msg):
+            if proba(0.01, 0.25, 60*60, time.time()-self.ditTime):
+                text=self.sqldb.get()
+                if text is not None:
+                    await msg.channel.send(text)
 
         await cmdElle(msg)
         await cmdBadLang(msg)
         await cmdMotus(msg)
         await cmdPerdu(msg)
         await cmdDit(msg)
+        await cmdShit(msg)
+
+    async def on_reaction_add(self, reaction, user):
+        self.sqldb.add(reaction.message.content)
 
 if __name__ == "__main__":
     bot = Bot()
