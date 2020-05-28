@@ -78,11 +78,13 @@ class Bot(discord.Client):
             if proba(0.25, 0.75, 10*60, time.time()-self.ditTime):
                 self.ditTime = time.time()
 
-                text = str(msg.content).lower()
-                pos = text.find("di")
+                text = str(msg.content)
+                pos = text.lower().find("di")
+                if pos == -1:
+                    pos = text.lower().find("dy")
                 if pos != -1:
                     if text[pos+2:len(text)]:
-                        if text[pos+2] == 't':
+                        if text[pos:pos+4] == 'dit ':
                             if text[pos+3:len(text)]:
                                 await msg.channel.send(text[pos+3:len(text)])
                         else:
