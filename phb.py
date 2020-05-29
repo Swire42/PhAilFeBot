@@ -118,10 +118,10 @@ class Bot(discord.Client):
                     
         async def cmdRename(msg):
             if str(msg.author) != "PhAilFeBot":
-                text = str(msg.content).lower()
-                pos = text.find("je suis")
+                text = str(msg.content)
+                pos = text.lower().find("je suis ")
                 if pos != -1:
-                    start = pos + len("je suis")
+                    start = pos + len("je suis ")
                     if text[start:len(text)]:
                         if len(text) - start > 32:
                             end = text.rfind(" ", start, start + 32)
