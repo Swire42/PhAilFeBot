@@ -4,7 +4,7 @@ import random
 import time
 import motus
 import math
-import sql
+import phsql
 
 def proba(a, b, tau, t):
     return random.random() < b+(a-b)*math.exp(-t/tau)
@@ -12,7 +12,7 @@ def proba(a, b, tau, t):
 class Bot(discord.Client):
     def __init__(self):
         super().__init__()
-        self.sqldb=sql.SQLDB()
+        self.sqldb=phsql.SQLDB()
         self.motusGame=None
         self.motusLock=False
         self.time = time.time()
