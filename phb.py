@@ -66,7 +66,7 @@ class Bot(discord.Client):
                         self.motusGame=motus.Motus()
                         await msg.channel.send("```\n"+self.motusGame.txt()+"\n```")
                 else:
-                    ret=self.motusGame.submit(text, msg.author.display_name)
+                    ret=self.motusGame.submit(text, str(msg.author))
                     if len(text)==8:
                         if ret>=0:
                             await msg.channel.send("```\n"+self.motusGame.txt()+"\n```")
@@ -115,7 +115,7 @@ class Bot(discord.Client):
                 text=self.sqldb.get()
                 if text is not None:
                     await msg.channel.send(text)
-                    
+
         async def cmdRename(msg):
             if str(msg.author) != "PhAilFeBot":
                 text = str(msg.content).lower()
