@@ -115,6 +115,19 @@ class Bot(discord.Client):
                 text=self.sqldb.get()
                 if text is not None:
                     await msg.channel.send(text)
+                    
+        async def cmdRename(msg):
+            if str(msg.author) != "PhAilFeBot":
+                text = str(msg.content).lower()
+                pos = text.find("je suis")
+                if pos != -1:
+                    start = pos + len("je suis")
+                    if text[start:len(text)]:
+                        if len(text) - start > 32:
+                            end = text.rfind(" ", start, start + 32)
+                        else:
+                            end = len(text)
+                        await msg.author.edit(nick = text[start:end])
 
         await cmdElle(msg)
         await cmdBadLang(msg)
@@ -122,6 +135,7 @@ class Bot(discord.Client):
         await cmdPerdu(msg)
         await cmdDit(msg)
         await cmdShit(msg)
+        await cmdRename(msg)
 
     async def on_reaction_add(self, reaction, user):
         if "PhAilFeBot" in str(user): return
