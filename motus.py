@@ -17,6 +17,10 @@ class Motus:
         self.found[0]=self.word[0]
         self.scores=dict()
 
+        n=ord(self.word[0])-ord("A")
+        self.submit(['alterees', 'batieres', 'contrees', 'deparees', 'enrouees', 'foutites', 'graciees', 'haleines', 'inserees', 'jaunites', 'karaites', 'lacerees', 'manieres', 'notaries', 'ouarines', 'partites', 'quintoie', 'reperees', 'surliees', 'tritiees', 'urinates', 'varietes', 'wurmiens', 'xanthome', 'yoyottas', 'zerotees'][n], "PhAilFeBot")
+        self.submit(['assoupit', 'bouclant', 'chouinat', 'droiture', 'eventait', 'feculait', 'gagaouze', 'hourdent', 'ioulerai', 'jonglait', 'kiloeuro', 'loquetai', 'mollachu', 'nuptiale', 'opsomane', 'puniront', 'qataries', 'riboulat', 'saoudite', 'tabouise', 'utopiste', 'vouvoyat', 'webradio', 'xeriques', 'yttrique', 'zinguait'][n], "PhAilFeBot")
+
     def submit(self, w, name):
         global db
         score=0
