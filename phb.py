@@ -93,10 +93,11 @@ class Bot(discord.Client):
                     self.time = time.time()
 
         async def cmdDit(msg):
+            text = str(msg.content)
+            if len(text)>100: return
             if proba(0.33, 0.75, 10*60, time.time()-self.ditTime):
                 self.ditTime = time.time()
 
-                text = str(msg.content)
                 pos = text.lower().find("di")
                 if pos == -1:
                     pos = text.lower().find("dy")
